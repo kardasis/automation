@@ -1,9 +1,17 @@
 import express from 'express'
+import {Gpio} from 'onoff'
 
-console.log('running')
+console.log({Gpio})
 
 const app = express()
 const port = 3000
+const led = new Gpio(21, 'out')
 
-app.get('/', (req, res) => res.send('Hello World!'))
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+led.writeSync(0)
+
+app.get('/', (req, res) => {
+  console.log('message')
+  led.writeSync(1)
+}) 
+app.listen(port, () => { 
+})
